@@ -17,10 +17,22 @@
 </head>
 <body>
 	
-	<div ng-app="myApp" class="container-fluid" ng-controller="myController as ctrl">
+	<div ng-app="myApp" class="container-fluid">
 		<h1>NgTable Demo App</h1>
-		<div class="col-md-6">
+		<div class="col-md-6" ng-controller="myController as ctrl">
 			<table ng-table="ctrl.tableParams" class="table" show-filter="true">
+				<caption>getData via ajax request</caption>
+			    <tr ng-repeat="user in $data">
+			        <td title="'Name'" filter="{ name: 'text'}" sortable="'name'">
+			            {{user.name}}</td>
+			        <td title="'Age'" filter="{ age: 'number'}" sortable="'age'">
+			            {{user.age}}</td>
+			    </tr>
+			</table>
+		</div>
+		<div class="col-md-6" ng-controller="myStaticController as stCtrl">
+			<table ng-table="stCtrl.tableParams" class="table" show-filter="true">
+				<caption>Static dataset, initial ajax reqest</caption>
 			    <tr ng-repeat="user in $data">
 			        <td title="'Name'" filter="{ name: 'text'}" sortable="'name'">
 			            {{user.name}}</td>

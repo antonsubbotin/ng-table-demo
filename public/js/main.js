@@ -12,7 +12,8 @@ function myController(NgTableParams, http) {
 				  method: 'GET',
 				  url: '/data'
 				}).then(function successCallback(response) {
-					console.log(response);
+					// console.log(params.filter());
+					params.total(response.data.length);
 					return response.data;
 				  }, function errorCallback(response) {
 				  	console.log(response);
@@ -21,5 +22,27 @@ function myController(NgTableParams, http) {
 				    return;
 			});
 		}
+	});
+}
+
+app.controller("myStaticController", myStaticController);
+
+myStaticController.$inject = ["NgTableParams", "$http"];
+
+function myStaticController(NgTableParams, http) {
+	var self = this;
+
+	http({
+		  method: 'GET',
+		  url: '/data'
+	}).then(function successCallback(response) {
+			self.tableParams = new NgTableParams({}, {
+				dataset: response.data
+			});
+		  }, function errorCallback(response) {
+		  	console.log(response);
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		    return;
 	});
 }
