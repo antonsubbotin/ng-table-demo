@@ -36,8 +36,10 @@ function myStaticController(NgTableParams, http) {
 		  method: 'GET',
 		  url: '/data'
 	}).then(function successCallback(response) {
-			self.tableParams = new NgTableParams({}, {
-				dataset: response.data
+			self.tableParams = new NgTableParams({
+				total: response.data.length
+			}, {
+				dataset: response.data,
 			});
 		  }, function errorCallback(response) {
 		  	console.log(response);
